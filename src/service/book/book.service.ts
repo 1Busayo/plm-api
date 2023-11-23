@@ -77,20 +77,22 @@ export class BookService {
 
   async getbookbyISBN(isbn) {
     let url = `https://openlibrary.org/isbn/${isbn}.json`;
+     
 
-    return this.httpService.get(url).pipe(
+    return await this.httpService.get(url).pipe(
      
       map(response => {
 
             // Process the response from the Open Library API
             const data = response.data;
             // Extract relevant information and return
-            return data
+       
+          return data
           }),
       catchError(error => {
         // Handle network errors here
         console.error('Network error:', error.message);
-        throw new HttpException(`Unable to find the book please tryagain later `, HttpStatus.NOT_IMPLEMENTED)
+        throw new HttpException(`Unable to find the book please try again later `, HttpStatus.NOT_IMPLEMENTED)
       }),
     );
   }

@@ -71,7 +71,7 @@ export class BookController {
 
     @Get('openapi/:id')
     @ApiTags('Open Librarys API , get book by ISBN')
-   async getbookbyISBN( @Param('id', ParseIntPipe) isbn: number) {
+   async getbookbyISBN( @Param('id', ParseIntPipe) isbn: number ) {
         return this.bookService.getbookbyISBN(isbn);
     }
 
