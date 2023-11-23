@@ -23,8 +23,13 @@ export class UsersController {
     @Post('add')
     @ApiTags('Add User')
     @UsePipes(ValidationPipe)
-    createUser(@Body() userDto: UserDto) {
-        return this.userService.createUser(userDto);
+   async createUser(@Body() userDto: UserDto ,@Res() response: Response) {
+        const addusr = await this.userService.createUser(userDto);
+        return response.status(200).json({
+            status: 'success',
+            message: 'User has been created succesfully',
+            data: addusr,
+          });
     }
 
     @Put('update/:id')
@@ -53,7 +58,7 @@ export class UsersController {
     const logi= await this.authService.validateUserByPassword(loginDto);
     return response.status(200).json({
         status: 'success',
-        message: 'Logged in suuccesfully',
+        message: 'Logged in succesfully',
         data: logi,
       });
     
